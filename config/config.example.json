@@ -1,0 +1,34 @@
+{
+  "rpc": {
+    "solana": "https://mainnet.helius-rpc.com/?api-key=YOUR_API_KEY",
+    "eth": "https://eth.llamarpc.com",
+    "base": "https://base.llamarpc.com",
+    "mega": "https://carrot.megaeth.com/rpc",
+    "tempo": "https://rpc.testnet.tempodex.xyz"
+  },
+  "wallets": {
+    "solana": "~/.hermes/wallets/solana-keypair.json",
+    "evm": "~/.hermes/wallets/wallets.json"
+  },
+  "lp": {
+    "max_position_size_usd": 20,
+    "gas_reserve_usd": 5,
+    "auto_claim_threshold_usd": 0.5,
+    "max_concurrent_positions": 3,
+    "oor_timeout_hours": 2,
+    "pnl_stop_loss_pct": -15,
+    "screen_interval_hours": 6
+  },
+  "mint": {
+    "default_chain": "base",
+    "gas_multiplier": 1.2,
+    "max_gas_price_gwei": 50,
+    "dry_run": true
+  },
+  "intel": {
+    "helius_api_key": "YOUR_API_KEY",
+    "birdeye_api_key": "YOUR_API_KEY",
+    "whale_min_amount_usd": 50000,
+    "screen_top_n_pools": 10
+  }
+}

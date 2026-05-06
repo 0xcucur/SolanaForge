@@ -1,0 +1,32 @@
+{
+  "name": "solanaforge",
+  "version": "1.0.0",
+  "description": "Autonomous AI Agent Framework for Solana DeFi — NFT minting, LP management, on-chain intelligence, security audit",
+  "main": "agents/lp/lp_bot.js",
+  "scripts": {
+    "screen": "node agents/lp/lp_bot.js screen",
+    "deploy": "node agents/lp/lp_bot.js deploy",
+    "status": "node agents/lp/lp_bot.js status",
+    "mint": "python3 agents/mint/mint_bot.py",
+    "mint:dry": "python3 agents/mint/mint_bot.py --dry-run",
+    "audit": "python3 agents/security/rug_detector.py"
+  },
+  "keywords": [
+    "solana",
+    "defi",
+    "ai-agent",
+    "nft-minting",
+    "liquidity-pool",
+    "meteora",
+    "dlmm",
+    "multi-agent",
+    "hermes-agent"
+  ],
+  "dependencies": {
+    "@meteora-ag/dlmm": "^1.0.0",
+    "@solana/web3.js": "^1.90.0",
+    "@solana/spl-token": "^0.4.0",
+    "bs58": "^6.0.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,9 @@
+node_modules/
+config/config.json
+*.key
+*.pem
+wallets/
+.env
+__pycache__/
+*.pyc
+.DS_Store
