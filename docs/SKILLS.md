@@ -1,6 +1,6 @@
 # 📚 Skills Registry — SolanaForge
 
-SolanaForge ships with **282 specialized agent skills** organized by domain. Skills are loaded on-demand via `skill_view()` to minimize token consumption.
+SolanaForge ships with **283 specialized agent skills** organized by domain. Skills are loaded on-demand via `skill_view()` to minimize token consumption.
 
 ## Overview
 

@@ -16,7 +16,7 @@
 │  ┌──────▼──────┐    ┌─────────────┐    ┌─────────────┐     │
 │  │   Agent     │    │   Cron      │    │   Memory    │     │
 │  │  Delegation │    │  Scheduler  │    │  (Long-term)│     │
-│  │ (Parallel)  │    │ (Context    │    │ (282 skills)│     │
+│  │ (Parallel)  │    │ (Context    │    │ (283 skills)│     │
 │  └──────┬──────┘    │  Chaining)  │    └─────────────┘     │
 │         │           └─────────────┘                         │
 │  ┌──────▼──────────────────────────────────────────┐       │
@@ -85,7 +85,7 @@ delegate_task(
 
 ## Skill Registry
 
-282 skills organized by domain:
+283 skills organized by domain:
 - **solana/** (77): Raydium, Jupiter, Orca, Meteora, Helius, Birdeye, etc.
 - **hack/** (102): Security auditing, vulnerability scanning, penetration testing
 - **meta/** (4): Self-improvement, memory, skill factory

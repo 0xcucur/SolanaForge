@@ -92,7 +92,7 @@ Solana DeFi moves fast. Manual operations mean missed mints, unoptimized LP posi
 
 ### Token Consumption
 - **~500K tokens/day** across 4 agents
-- 282 specialized skills loaded on demand
+- 283 specialized skills (29 categories) loaded on demand
 - Multi-model routing via Manifest (cost optimization)
 - RTK integration for 60-90% token savings on terminal output
 
@@ -104,10 +104,10 @@ Solana DeFi moves fast. Manual operations mean missed mints, unoptimized LP posi
 5. **Wallet Generation**: Created Solana + EVM wallets with proper key management
 
 ### Metrics
-- **282 agent skills** installed and organized
+- **283 agent skills** (29 categories) installed and organized
 - **4 autonomous agents** running parallel workflows
 - **6 Solana protocols** integrated (Raydium, Jupiter, Orca, Meteora, Helius, Birdeye)
-- **4 EVM chains** supported (ETH, Base, MegaETH, Tempo)
+- **5 EVM chains** supported (Ethereum, Base, MegaETH, Tempo, Sepolia)
 - **100+ wallet patterns** analyzed for LP strategy
 
 ## 🛠️ Tech Stack
@@ -165,9 +165,9 @@ SolanaForge/
 │       ├── rug_detector.py    # Rug pull detection
 │       ├── skill_auditor.py   # Agent skill security audit
 │       └── README.md
-├── skills/             # 282 specialized agent skills
-│   ├── solana/         # 177 Solana ecosystem skills
+├── skills/             # 283 specialized agent skills (29 categories)
 │   ├── hack/           # 102 security/hacking skills
+│   ├── solana/         # 77 Solana ecosystem skills
 │   └── meta/           # Meta-skills (self-improvement)
 ├── scripts/            # Utility scripts
 ├── config/             # Configuration templates
