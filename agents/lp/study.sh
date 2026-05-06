@@ -2,7 +2,7 @@
 # Deep LP Study Script — analyzes top pools for optimal LP strategy
 # Usage: bash study.sh [pool_address]
 
-cd /root/.hermes/wallets/solana-lp-bot
+cd ~/.hermes/wallets/solana-lp-bot
 
 if [ -z "$1" ]; then
     echo "Usage: study.sh <pool_address>"
@@ -11,7 +11,7 @@ if [ -z "$1" ]; then
 fi
 
 POOL="$1"
-API_KEY="bWVyaWRpYW4taXMtdGhlLWJlc3QtYWdlbnRz"
+API_KEY="${AGENT_MERIDIAN_KEY:-YOUR_AGENT_MERIDIAN_KEY}"
 
 echo "🔬 Deep Study: $POOL"
 echo "============================================"

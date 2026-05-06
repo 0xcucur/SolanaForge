@@ -19,10 +19,10 @@ const fs = require("fs");
 const path = require("path");
 
 // ─── CONFIG ───
-const HELIUS_RPC = "https://mainnet.helius-rpc.com/?api-key=51865cad-1741-442b-ba62-d87098c72124";
-const WALLET_PATH = path.join(process.env.HOME, ".hermes/wallets/wallets.json");
+    const HELIUS_RPC = process.env.HELIUS_RPC || "https://mainnet.helius-rpc.com/?api-key=YOUR_API_KEY";
+const WALLET_PATH = process.env.WALLET_PATH || path.join(process.env.HOME, ".hermes/wallets/wallets.json");
 const STATE_PATH = path.join(__dirname, "state.json");
-const AGENT_MERIDIAN_KEY = "bWVyaWRpYW4taXMtdGhlLWJlc3QtYWdlbnRz";
+const AGENT_MERIDIAN_KEY = process.env.AGENT_MERIDIAN_KEY || "YOUR_AGENT_MERIDIAN_KEY";
 
 // Strategy parameters (learned from top LPers)
 const STRATEGY = {

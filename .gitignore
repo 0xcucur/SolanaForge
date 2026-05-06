@@ -4,6 +4,9 @@ config/config.json
 *.pem
 wallets/
 .env
+.env.local
 __pycache__/
 *.pyc
 .DS_Store
+state.json
+*.log

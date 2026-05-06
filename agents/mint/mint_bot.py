@@ -496,7 +496,7 @@ def load_config(config_path: str) -> dict:
 
 def load_wallet_private_key() -> str:
     """Load private key from wallets.json"""
-    wallet_path = Path.home() / ".hermes" / "wallets" / "wallets.json"
+    wallet_path = Path(os.environ.get("WALLET_PATH", str(Path.home() / ".hermes" / "wallets" / "wallets.json")))
     if not wallet_path.exists():
         raise FileNotFoundError(f"Wallet file not found: {wallet_path}")
     with open(wallet_path) as f:
