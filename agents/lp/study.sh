@@ -2,7 +2,9 @@
 # Deep LP Study Script — analyzes top pools for optimal LP strategy
 # Usage: bash study.sh [pool_address]
 
-cd ~/.hermes/wallets/solana-lp-bot
+# Resolve script directory and cd there
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
 
 if [ -z "$1" ]; then
     echo "Usage: study.sh <pool_address>"

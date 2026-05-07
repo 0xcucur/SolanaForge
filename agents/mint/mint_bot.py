@@ -276,7 +276,7 @@ class MintBot:
         # Get gas parameters
         try:
             latest_block = self.w3.eth.get_block('latest')
-            base_fee = latest_block.get('baseFeePerFee', self.w3.eth.gas_price)
+            base_fee = latest_block.get('baseFeePerGas', self.w3.eth.gas_price)
         except Exception:
             base_fee = self.w3.eth.gas_price
         

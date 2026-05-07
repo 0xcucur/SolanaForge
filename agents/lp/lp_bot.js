@@ -468,8 +468,59 @@ async function main() {
       console.log("🤖 Auto mode: screening + deploying best pool");
       const state = loadState();
       if (state.positions.length >= STRATEGY.maxPositions) {
-        console.log(`Already at max positions (${STRATEGY.maxPositions}), running management...`);
-        // TODO: run management loop
+        console.log(`Already at max positions (${STRATEGY.maxPositions}), running management loop...`);
+
+        // ── Management loop: check each open position ──
+        for (const pos of state.positions) {
+          try {
+            const dlmm = await DLMM.create(connection, new PublicKey(pos.pool));
+            const activeBin = await dlmm.getActiveBin();
+            const userPositions = await dlmm.getPositionsByUserAndLbPair(wallet.publicKey);
+            const ourPos = userPositions.userPositions?.find(
+              (p) => p.publicKey.toString() === pos.positionPubkey
+            );
+
+            if (!ourPos) {
+              console.log(`  ⚠️ Position ${pos.positionPubkey.slice(0, 12)}… not found on-chain, skipping`);
+              continue;
+            }
+
+            const isActive = activeBin.binId >= ourPos.lowerBinId && activeBin.binId <= ourPos.upperBinId;
+            const outOfRangeMinutes = isActive ? 0 : (Date.now() - pos.openTime) / (1000 * 60);
+            const holdHours = (Date.now() - pos.openTime) / (1000 * 60 * 60);
+
+            console.log(`\n  Pool: ${pos.name || pos.pool}`);
+            console.log(`    Active bin: ${activeBin.binId} | In range: ${isActive ? "✅" : "❌"}`);
+            console.log(`    Hold: ${holdHours.toFixed(1)}h | OOR: ${outOfRangeMinutes.toFixed(0)}min`);
+
+            // Close if out-of-range too long
+            if (!isActive && outOfRangeMinutes > STRATEGY.oorCloseMinutes) {
+              console.log(`    → Out of range > ${STRATEGY.oorCloseMinutes}min, closing position...`);
+              await closePosition(connection, wallet, pos.pool, pos.positionPubkey);
+              continue;
+            }
+
+            // Check stop-loss
+            const solPrice = await fetchSolPrice();
+            const currentValueUsd = pos.amountUsd; // approximate
+            // TODO: calculate real PnL from on-chain data
+            const priceChangePct = ((activeBin.price - pos.openPrice) / pos.openPrice) * 100;
+            if (priceChangePct <= STRATEGY.stopLossPct) {
+              console.log(`    → Price dropped ${priceChangePct.toFixed(1)}% (stop-loss: ${STRATEGY.stopLossPct}%), closing...`);
+              await closePosition(connection, wallet, pos.pool, pos.positionPubkey);
+              continue;
+            }
+
+            // Claim fees if above threshold
+            if (isActive) {
+              console.log(`    → Position in range, checking fees...`);
+              // TODO: check accumulated fees and claim if > STRATEGY.minClaimFeeUsd
+              console.log(`    → Fee claim check (TODO: integrate fee data)`);
+            }
+          } catch (e) {
+            console.log(`  ❌ Error managing ${pos.pool}: ${e.message}`);
+          }
+        }
       } else {
         const pools = await screenPools();
         if (pools.length === 0) {

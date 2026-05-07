@@ -78,11 +78,40 @@ def analyze(token_address: str) -> ScanResult:
     """Run full rug detection analysis."""
     result = ScanResult(token=token_address)
 
-    # TODO: Wire up real API calls
-    # For now, this is the framework — integrate with Helius/Birdeye
-
     print(f"\n🔍 Scanning token: {token_address}")
     print("=" * 60)
+
+    # ── Fetch on-chain data ───────────────────────────────────────────────
+    # TODO: Replace placeholders with real API calls
+
+    # TODO: Helius RPC — get token mint info (mint authority, freeze authority, supply)
+    #   Example: GET https://api.helius-rpc.com/?api-key={HELIUS_API_KEY}
+    #   Body: {"jsonrpc":"2.0","id":1,"method":"getAsset","params":{"id": token_address}}
+    mint_info = {
+        "mintAuthority": None,  # TODO: fetch from Helius getAsset
+        "freezeAuthority": None,  # TODO: fetch from Helius getAsset
+    }
+
+    # TODO: Helius RPC — get top holders for the token
+    #   Example: GET with method "getTokenLargestAccounts"
+    holders = []  # TODO: fetch from Helius, parse into [{"pct": float, "address": str}]
+
+    # TODO: Birdeye API — get pool/liquidity data
+    #   Example: GET https://public-api.birdeye.so/defi/pools?address={token_address}
+    #   Headers: {"X-API-KEY": BIRDEYE_API_KEY}
+    pool_data = {"tvl": 0}  # TODO: fetch from Birdeye
+
+    # TODO: Check LP lock status (e.g., via RugCheck or Birdeye)
+    lp_info = {"locked": False}  # TODO: fetch from RugCheck/Birdeye
+
+    # TODO: Birdeye — check deployer history for rug patterns
+    #   Query previous tokens by deployer wallet
+
+    # ── Run all checks ────────────────────────────────────────────────────
+    check_mint_authority(mint_info, result)
+    check_holder_concentration(holders, result)
+    check_liquidity(pool_data, result)
+    check_lp_lock(lp_info, result)
 
     # Determine verdict
     if result.score >= 50:
