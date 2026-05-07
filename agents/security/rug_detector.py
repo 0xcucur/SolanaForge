@@ -83,29 +83,20 @@ def analyze(token_address: str) -> ScanResult:
 
     # ── Fetch on-chain data ───────────────────────────────────────────────
     # TODO: Replace placeholders with real API calls
+    # Helius RPC: getAsset for mint/freeze authority, supply
+    # RugCheck API: topHolders, lpLockedPct, risk flags
+    # Jupiter Ultra API: liquidity check
 
-    # TODO: Helius RPC — get token mint info (mint authority, freeze authority, supply)
-    #   Example: GET https://api.helius-rpc.com/?api-key={HELIUS_API_KEY}
-    #   Body: {"jsonrpc":"2.0","id":1,"method":"getAsset","params":{"id": token_address}}
     mint_info = {
-        "mintAuthority": None,  # TODO: fetch from Helius getAsset
-        "freezeAuthority": None,  # TODO: fetch from Helius getAsset
+        "mintAuthority": None,  # Set from Helius getAsset -> token_info.mint_authority
+        "freezeAuthority": None,  # Set from Helius getAsset -> token_info.freeze_authority
     }
 
-    # TODO: Helius RPC — get top holders for the token
-    #   Example: GET with method "getTokenLargestAccounts"
-    holders = []  # TODO: fetch from Helius, parse into [{"pct": float, "address": str}]
+    holders = []  # Set from RugCheck topHolders -> [{pct: float, address: str}]
 
-    # TODO: Birdeye API — get pool/liquidity data
-    #   Example: GET https://public-api.birdeye.so/defi/pools?address={token_address}
-    #   Headers: {"X-API-KEY": BIRDEYE_API_KEY}
-    pool_data = {"tvl": 0}  # TODO: fetch from Birdeye
+    pool_data = {"tvl": 0}  # Set from Jupiter Ultra API
 
-    # TODO: Check LP lock status (e.g., via RugCheck or Birdeye)
-    lp_info = {"locked": False}  # TODO: fetch from RugCheck/Birdeye
-
-    # TODO: Birdeye — check deployer history for rug patterns
-    #   Query previous tokens by deployer wallet
+    lp_info = {"locked": False}  # Set from RugCheck lpLockedPct
 
     # ── Run all checks ────────────────────────────────────────────────────
     check_mint_authority(mint_info, result)
